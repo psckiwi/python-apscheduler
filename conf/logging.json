@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "simple": {
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    },
+    "detail": {
+      "format": "%(asctime)s [%(levelname)s] %(pathname)s %(funcName)s() : %(lineno)d - %(message)s"
+    }
+  },
+  "handlers": {
+    "console": {
+      "class": "logging.StreamHandler",
+      "level": "DEBUG",
+      "formatter": "simple",
+      "stream": "ext://sys.stdout"
+    },
+    "info_file_handler": {
+      "class": "logging.handlers.TimedRotatingFileHandler",
+      "level": "INFO",
+      "formatter": "simple",
+      "filename": "../log/scheduler.log",
+      "when": "midnight",
+      "interval": 1,
+      "backupCount": 30,
+      "encoding": "utf8"
+    },
+    "err_file_handler": {
+      "class": "logging.handlers.TimedRotatingFileHandler",
+      "level": "ERROR",
+      "formatter": "detail",
+      "filename": "../log/error.log",
+      "when": "midnight",
+      "interval": 1,
+      "backupCount": 30,
+      "encoding": "utf8"
+    }
+  },
+  "root": {
+    "level": "DEBUG",
+    "handlers": [
+      "console",
+      "info_file_handler",
+      "err_file_handler"
+    ]
+  }
+}
